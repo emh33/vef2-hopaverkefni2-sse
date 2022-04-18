@@ -1,8 +1,11 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link'
 import styles from '../styles/Home.module.css';
 
-const Menu: NextPage = () => (
+const Menu: NextPage = ({categories, menu}: Props) => {
+  return(
+
     <div className={styles.container}>
       <Head>
         <title>Menu</title>
@@ -11,8 +14,26 @@ const Menu: NextPage = () => (
       </Head>
       <main>
         <p>Hér verður menu</p>
+        
+          <ul>
+            {categories.items.map(function(item: any, i:number){
+              return(
+                <Link href={'/categories/'+item.id.toString()}>
+                  <a><li key={i}>{item.title}</li></a>
+                </Link>
+              )
+            })}
+          </ul>
       </main>
     </div>
-);
+  )
+}
+export async function getServerSideProps() {
+  const categoriesRes = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/categories')
+  const categories = await categoriesRes.json()
+  const menuRes = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/menu')
+  const menu = await menuRes.json()
+  return { props: {categories, menu}}
+}
 
 export default Menu;
