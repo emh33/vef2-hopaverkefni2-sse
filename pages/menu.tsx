@@ -1,13 +1,12 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link'
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import AddToCart from '../components/AddToCartButton'
 
 type Props = any;
 
-const Menu: NextPage = ({categories, menu}: Props) => {
-  return(
+const Menu: NextPage = ({ categories, menu }: any) => (
 
     <div className={styles.container}>
       <Head>
@@ -19,15 +18,12 @@ const Menu: NextPage = ({categories, menu}: Props) => {
         <p>Hér verður menu</p>
 
         <AddToCart />
-        
           <ul>
-            {categories.items.map(function(item: any, i:number){
-              return(
-                <Link href={'/categories/'+item.id.toString()}>
-                  <a><li key={i}>{item.title}</li></a>
+            {categories.items.map((item: any, i:number) => (
+                <Link key={i} href={`/categories/${item.id.toString()}`}>
+                  <li >{item.title}</li>
                 </Link>
-              )
-            })}
+            ))}
           </ul>
 
           <ul>
@@ -39,14 +35,13 @@ const Menu: NextPage = ({categories, menu}: Props) => {
           </ul>
       </main>
     </div>
-  )
-}
+);
 export async function getServerSideProps() {
-  const categoriesRes = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/categories')
-  const categories = await categoriesRes.json()
-  const menuRes = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/menu')
-  const menu = await menuRes.json()
-  return { props: {categories, menu}}
+  const categoriesRes = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/categories');
+  const categories = await categoriesRes.json();
+  const menuRes = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/menu');
+  const menu = await menuRes.json();
+  return { props: { categories, menu } };
 }
 
 export default Menu;

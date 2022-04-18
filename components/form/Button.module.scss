@@ -1,0 +1,19 @@
+@import '../../styles/config';
+.button {
+  background-color: var(--color-accent);
+  border: 1px solid #fff;
+  border-radius: 8px;
+  max-width: 300px;
+  padding: 0.5rem;
+  transition: background-color ease-in 200ms, color ease-in 200ms;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: auto;
+
+  &:hover {
+    background-color: var(--color-accent-dark);
+    color: var(--color-white);
+  }
+}
