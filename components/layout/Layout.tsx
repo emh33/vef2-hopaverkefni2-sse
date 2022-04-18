@@ -3,11 +3,14 @@ import s from './Layout.module.scss';
 
 type Props = {
   title:string;
+  header: React.ReactNode;
   children: React.ReactNode;
   footer: React.ReactNode;
 };
 
-export function Layout({ title, children, footer } : Props) : JSX.Element {
+export function Layout({
+  title, header, children, footer,
+} : Props) : JSX.Element {
   return (
     <div className={s.layout}>
       <Head>
@@ -16,7 +19,7 @@ export function Layout({ title, children, footer } : Props) : JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={s.layout__header}>
-        <h1>{title}</h1>
+        {header}
       </header>
       <main className={s.layout__main}>
         {children}

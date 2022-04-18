@@ -24,9 +24,6 @@ export function Login():JSX.Element {
   return (
     <>
       <p>
-        <Link href="/">Forsíða</Link>
-      </p>
-      <p>
         <Link href="/admin/login">Innskráning starfsmanna</Link>
       </p>
     </>

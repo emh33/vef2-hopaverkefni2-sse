@@ -6,6 +6,7 @@ import { Layout } from '../../components/layout/Layout';
 import { postLogin } from '../../lib/request';
 import { AppContext } from '../../lib/state';
 import { Login as LoginComponent } from '../../components/user/Login';
+import { NavBar } from '../../components/layout/NavBar';
 
 export default function Login(): JSX.Element {
   const context = useContext(AppContext);
@@ -40,6 +41,7 @@ export default function Login(): JSX.Element {
     <>
       <Layout
         title="Veitingarstaðurinn Góði"
+        header={(<NavBar cartItems={0}/>)}
         footer={(
           <LoginComponent />
         )}
