@@ -20,6 +20,7 @@ module.exports = {
     'max-len': ["error", { "code": 100 }],
     'import/prefer-default-export': 'off',
     'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
+    'linebreak-style': ["error", "windows"],
     'react/jsx-props-no-spreading': 'off',
     'react/no-array-index-key': 'off',
     'react/prop-types': 'off',

@@ -10,6 +10,7 @@ function Category({ category }:any) {
     <h1>{category.title}</h1>
    </div>
   );
+
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

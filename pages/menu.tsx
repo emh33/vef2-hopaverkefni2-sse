@@ -2,6 +2,9 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
+import AddToCart from '../components/AddToCartButton'
+
+type Props = any;
 
 const Menu: NextPage = ({ categories, menu }: any) => (
 
@@ -14,12 +17,21 @@ const Menu: NextPage = ({ categories, menu }: any) => (
       <main>
         <p>Hér verður menu</p>
 
+        <AddToCart />
           <ul>
             {categories.items.map((item: any, i:number) => (
                 <Link key={i} href={`/categories/${item.id.toString()}`}>
                   <li >{item.title}</li>
                 </Link>
             ))}
+          </ul>
+
+          <ul>
+            {menu.items.map(function(item: any, i:number){
+              return(
+                  <li key={i}>{item.title}</li>
+              )
+            })}
           </ul>
       </main>
     </div>
