@@ -1,8 +1,11 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
+import { AppWrapper } from '../lib/state';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+  return (
+    <AppWrapper>
+      <Component {...pageProps} />
+    </AppWrapper>
+  );
 }
-
-export default MyApp;
