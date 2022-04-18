@@ -27,7 +27,7 @@ export function Login():JSX.Element {
         <Link href="/">Forsíða</Link>
       </p>
       <p>
-        <Link href="/users/login">Innskráning starfsmanna</Link>
+        <Link href="/admin/login">Innskráning starfsmanna</Link>
       </p>
     </>
   );

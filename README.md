@@ -18,7 +18,7 @@ npm run start
 
 ## Test
 
-## Notast var við sýnilaus af hópverkefni 1
+## Notast er við bakenda af sýnilaus h1
 
 https://vef2-2022-h1-synilausn.herokuapp.com
 
