@@ -14,7 +14,7 @@ npm run start
 
 ## Vercel
 
-[Hlekkur]() á Vercel síðu.
+[Hlekkur](https://vef2-hopaverkefni2-sse.vercel.app/) á Vercel síðu.
 
 ## Test
 
