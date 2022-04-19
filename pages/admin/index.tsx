@@ -5,14 +5,16 @@ import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
 import { AppContext } from '../../lib/userContext';
 
-export default function Menu(): JSX.Element {
-  const { loggedin } = useContext(AppContext);
+export default function Admin(): JSX.Element {
+  const { loggedin, user } = useContext(AppContext);
   useEffect(() => {
-    if (!loggedin) {
+    if (!loggedin && !user) {
       Router.push('/admin/login');
     }
-  }, []);
-
+  }, [loggedin]);
+  // Búa til, eyða, breyta flokk category
+  // Búa til, eyða, breyta vöru á matseðli
+  // Skoða lista af pöntunum og velja pöntun
   return (
       <>
         <Layout

@@ -29,17 +29,17 @@ export default function Login(): JSX.Element {
       console.warn(login.user);
       context.newUser(login.user.user);
       setError([]);
-      router.push('/admin/menu');
+      router.push('/admin');
     }
 
     if (login.message) {
-      setError(login.message.errors.map((error:any) => error.msg));
+      setError(login.message.errors.map((error: { msg: string; }) => error.msg));
       console.info(errors);
     }
   };
   useEffect(() => {
     if (context.loggedin) {
-      router.push('/admin/menu');
+      router.push('/admin');
     }
   }, [context.loggedin]);
 
