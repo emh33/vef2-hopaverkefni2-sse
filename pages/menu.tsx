@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
-import AddToCart from '../components/AddToCartButton'
+import AddToCart from '../components/AddToCartButton';
 
 type Props = any;
 
@@ -27,11 +27,9 @@ const Menu: NextPage = ({ categories, menu }: any) => (
           </ul>
 
           <ul>
-            {menu.items.map(function(item: any, i:number){
-              return(
+            {menu.items.map((item: any, i:number) => (
                   <li key={i}>{item.title}</li>
-              )
-            })}
+            ))}
           </ul>
       </main>
     </div>

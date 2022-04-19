@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import Router from 'next/router';
 import { useContext } from 'react';
-import { AppContext } from '../../lib/state';
+import { AppContext } from '../../lib/userContext';
 
 export function Login():JSX.Element {
   const context = useContext(AppContext);
@@ -8,8 +9,8 @@ export function Login():JSX.Element {
   const onLogout = (e:React.MouseEvent<HTMLButtonElement>):void => {
     e.preventDefault();
     context.logoutUser();
+    Router.push('/');
   };
-
   if (context.loggedin) {
     return (
       <>

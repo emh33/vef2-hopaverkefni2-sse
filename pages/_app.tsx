@@ -1,13 +1,11 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-
-import { AppWrapper } from '../lib/state';
-
+import { UserContext } from '../lib/userContext';
 
 export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <AppWrapper>
+    <UserContext>
       <Component {...pageProps} />
-    </AppWrapper>
+    </UserContext>
   );
 }

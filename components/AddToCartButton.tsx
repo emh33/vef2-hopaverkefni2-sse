@@ -1,12 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 
-
-export default function AddToCart({}) {
-
-	return(
-		<div>
-		<button>setja í körfu</button>
-		
-		</div>
-	)
+export default function AddToCart() {
+  return (
+    <div>
+      <button>setja í körfu</button>
+    </div>
+  );
 }

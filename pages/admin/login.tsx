@@ -1,10 +1,11 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import router from 'next/router';
 import { Button } from '../../components/form/Button';
 import { Errors as ErrorsComponent } from '../../components/form/Errors';
 import { Input } from '../../components/form/Input';
 import { Layout } from '../../components/layout/Layout';
 import { postLogin } from '../../lib/request';
-import { AppContext } from '../../lib/state';
+import { AppContext } from '../../lib/userContext';
 import { Login as LoginComponent } from '../../components/user/Login';
 import { NavBar } from '../../components/layout/NavBar';
 
@@ -13,11 +14,11 @@ export default function Login(): JSX.Element {
   const [username, setUSername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setError] = useState<string[]>([]);
+
   const onChangeUsername = (e: React.ChangeEvent<HTMLInputElement>):void => {
     setUSername(e.target.value);
     console.info(username);
   };
-
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>):void => {
     setPassword(e.target.value);
   };
@@ -28,7 +29,7 @@ export default function Login(): JSX.Element {
       console.warn(login.user);
       context.newUser(login.user.user);
       setError([]);
-      /// router.push('/');
+      router.push('/admin/menu');
     }
 
     if (login.message) {
@@ -36,6 +37,11 @@ export default function Login(): JSX.Element {
       console.info(errors);
     }
   };
+  useEffect(() => {
+    if (context.loggedin) {
+      router.push('/admin/menu');
+    }
+  }, [context.loggedin]);
 
   return (
     <>

@@ -14,42 +14,18 @@ export const AppContext = createContext<UserContextType>({
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function AppWrapper({ children }: any) : JSX.Element {
+export function UserContext({ children }: any) : JSX.Element {
   const [user, setUser] = useState<User | null>(null);
   const [loggedin, setLoggedin] = useState<boolean>(false);
 
   useEffect(() => {
     const localUser = JSON.parse(localStorage.getItem('user') || 'null');
-    setUser(localUser);
-    /* async function fetchUser(): Promise <void> {
-      const localUser = JSON.parse(localStorage.getItem('user') || 'null');
-      let token = 'null';
-      if (localUser !== 'null') {
-        token = localUser?.token;
-      }
-      console.info(`Token fundin á localstorage: ${token} `);
-      if (token) {
-        const res = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/users/me', {
-          headers: {
-            'Content-type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        // EF TOKEN er ekki lengur vikur þarf að logga út
-        if (!res.ok) {
-          await localStorage.setItem('user', 'null');
-          setUser(null);
-          setLoggedin(false);
-        }
-        if (res.ok) {
-          const result:User = await res.json();
-          setUser(result);
-          setLoggedin(true);
-        }
-      }
+    setUser(localUser?.user);
+    if (localUser !== null) {
+      setLoggedin(true);
+    } else {
+      setLoggedin(false);
     }
-
-    fetchUser(); */
   }, []);
 
   const logoutUser = () : void => {
