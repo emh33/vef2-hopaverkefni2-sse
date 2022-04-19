@@ -1,0 +1,11 @@
+@import '../../styles/config';
+.button {
+  border: 1px solid #fff;
+  border-radius: 8px;
+  padding: 0.5rem;
+  transition: background-color ease-in 200ms, color ease-in 200ms;
+
+  &:hover {
+    color: var(--color-white);
+  }
+}

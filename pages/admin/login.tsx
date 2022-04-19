@@ -17,7 +17,6 @@ export default function Login(): JSX.Element {
 
   const onChangeUsername = (e: React.ChangeEvent<HTMLInputElement>):void => {
     setUSername(e.target.value);
-    console.info(username);
   };
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>):void => {
     setPassword(e.target.value);
@@ -26,7 +25,6 @@ export default function Login(): JSX.Element {
   const submit = async () : Promise <void> => {
     const login = await postLogin({ username, password });
     if (login.user) {
-      console.warn(login.user);
       context.newUser(login.user.user);
       setError([]);
       router.push('/admin');
@@ -34,7 +32,6 @@ export default function Login(): JSX.Element {
 
     if (login.message) {
       setError(login.message.errors.map((error: { msg: string; }) => error.msg));
-      console.info(errors);
     }
   };
   useEffect(() => {

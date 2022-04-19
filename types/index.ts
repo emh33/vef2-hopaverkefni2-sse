@@ -20,3 +20,19 @@ export type UserContextType = {
   newUser: (user: User | null) => void;
   logoutUser: () => void;
 };
+
+export type Categories = {
+  limit: number,
+  offset: number,
+  items: CategoriesItems[],
+  _links:{
+    self:{
+      href:string
+    }
+  }
+};
+
+export type CategoriesItems = {
+  id?:number,
+  title:string
+};
