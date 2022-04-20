@@ -36,3 +36,11 @@ export type CategoriesItems = {
   id?:number,
   title:string
 };
+
+export type Cart = {
+  id?:string
+};
+
+export type CartContextType = {
+  cart: Cart | null
+};
