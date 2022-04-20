@@ -10,7 +10,6 @@ export const AppContext = createContext<CartContextType>({
 
 export function CartContext({ children }: any) : JSX.Element {
   const [cart, setCart] = useState<Cart | null>(null);
-  console.log('cltest:', cart);
   useEffect(() => {
     const url = 'https://vef2-2022-h1-synilausn.herokuapp.com/cart';
     const fetchData = async () => {
@@ -18,13 +17,19 @@ export function CartContext({ children }: any) : JSX.Element {
         const response = await fetch(url, { method: 'POST' });
         const json = await response.json();
         setCart(json);
+        console.info('jsn: ',json)
       } catch (error) {
         console.log('error', error);
       }
     };
-    fetchData();
-  }, []);
-  console.log('cltest2:', cart);
+    console.info('cltest:', cart);
+    const c = localStorage.getItem('cart')
+    console.info('cltest2: ',c )
+    if(c == null){
+      fetchData();
+    }
+  }, []);    
+  console.info('cltest3:', cart);
   return (
       <AppContext.Provider value={{
         cart,
