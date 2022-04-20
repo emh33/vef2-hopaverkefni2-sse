@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import AddToCart from '../components/AddToCartButton';
+import { CategoriesNav } from '../components/categoriesNav';
 
 type Props = any;
 
@@ -18,17 +19,15 @@ const Menu: NextPage = ({ categories, menu }: any) => (
         <p>Hér verður menu</p>
 
         <AddToCart />
-          <ul>
-            {categories.items.map((item: any, i:number) => (
-                <Link key={i} href={`/categories/${item.id.toString()}`}>
-                  <li >{item.title}</li>
-                </Link>
-            ))}
-          </ul>
+        <ul className={styles.catNav}>
+        {categories.items.map((item: any, i:number) => (
+          <CategoriesNav key={i} category={item} />
+        ))}
+        </ul>
 
           <ul>
             {menu.items.map((item: any, i:number) => (
-                  <li key={i}>{item.title}</li>
+              <li key={i}>{item.title}</li>
             ))}
           </ul>
       </main>
