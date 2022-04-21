@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import s from './categoryNav.module.css';
+import s from './categoryNav.module.scss';
 
 type Props = any;
 
