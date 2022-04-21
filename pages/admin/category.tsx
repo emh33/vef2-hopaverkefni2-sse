@@ -1,4 +1,4 @@
-import { InferGetServerSidePropsType } from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useContext } from 'react';
 import { AdminCategoryLayout } from '../../components/admin/category/Layout';
 import { Layout } from '../../components/layout/Layout';
@@ -31,8 +31,7 @@ export default function Category(
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const getServerSideProps = async () => {
+export const getServerSideProps : GetServerSideProps = async () => {
   const res = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/categories');
   const categories: Categories = (await res.json()) as Categories;
   return !categories ? { notFound: true } : {

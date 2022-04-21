@@ -44,3 +44,29 @@ export type Cart = {
 export type CartContextType = {
   cart: Cart | null
 };
+
+export type Menu = {
+  limit: number,
+  offset: number,
+  items: MenuItems[],
+  _links:{
+    self:{
+      href:string
+    }
+    next?:{
+      href:string
+    }
+  }
+};
+
+export type MenuItems = {
+  id:number,
+  title:string,
+  price:number,
+  description:string,
+  image:string,
+  category:number,
+  created:string,
+  updated:string
+
+};

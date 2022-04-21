@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { useContext } from 'react';
 import { AppContext } from '../../lib/userContext';
+import { AdminButton } from '../admin/Button';
 
 export function Login():JSX.Element {
   const context = useContext(AppContext);
@@ -21,7 +22,7 @@ export function Login():JSX.Element {
         <p>
         <Link href="/admin">Fara á starfsmannavef</Link>
       </p>
-        <button type="button" onClick={onLogout}>Útskrá</button>
+        <AdminButton onClick={onLogout}>ÚTSKRÁ</AdminButton>
       </>
     );
   }
