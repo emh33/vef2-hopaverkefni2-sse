@@ -1,4 +1,15 @@
 .catLink {
-	color: darkred;
+	display: flex;
+	justify-content: space-around;
 	text-decoration: underline;
+	padding: 1rem 0;
+	width: 100%;
+	height: 100%;
+}
+
+.catLink:hover,
+.catLink:focus,
+.catLink:active {
+  background-color: lightgrey;
+  border: thin solid black;
 }
