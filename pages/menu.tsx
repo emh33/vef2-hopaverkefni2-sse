@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import AddToCart from '../components/AddToCartButton';
-import { CategoriesNav } from '../components/categoriesNav';
+import { CategoriesNav } from '../components/CategoriesNav';
 
 type Props = any;
 

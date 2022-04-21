@@ -23,9 +23,8 @@ export function CartContext({ children }: any) : JSX.Element {
         // console.log('error', error);
       }
     };
-    // console.info('cltest:', cart);
 
-    console.info('cltest:', cart);
+    // console.info('cltest:', cart);
     const c = localStorage.getItem('cart');
     // console.info('cltest2: ', c);
     if (c == null) {
