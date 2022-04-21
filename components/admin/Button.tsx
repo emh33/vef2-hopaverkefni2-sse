@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import { ButtonHTMLAttributes } from 'react';
 import s from './Button.module.scss';
 
 type Props = {

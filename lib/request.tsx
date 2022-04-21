@@ -70,3 +70,24 @@ export const deleteCategories = async (id:string) => {
 
   return true;
 };
+export const patchCategories = async ({ title, id }:CategoriesItems) => {
+  const token = findTOKEN();
+  console.info(token);
+  const response = await fetch(`${BASE_URL}categories/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ title }),
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.info(response);
+  // Ef ekki gengur að ná setja in category á að taka user af localstorage
+  if (!response.ok) {
+    // await localStorage.setItem('user', 'null');
+    return false;
+  }
+
+  const catagory = await response.json();
+  return (catagory);
+};
