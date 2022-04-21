@@ -1,6 +1,7 @@
 import { GetServerSideProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 import { MenuListItem } from '../../components/MenuListItem';
+import styles from '../../styles/Home.module.css';
 
 function Category({ category, filtered }:any) {
   return (
@@ -8,12 +9,14 @@ function Category({ category, filtered }:any) {
     <Head>
      <title>{category.title}</title>
     </Head>
-    <h1>{category.title}</h1>
-    <ul>
-      {filtered.map((item: any, i:number) => (
-        <MenuListItem key={i} item={item}/>
-      ))}
-    </ul>
+    <main>
+      <h1>{category.title}</h1>
+      <ul className={styles.menuList}>
+        {filtered.map((item: any, i:number) => (
+          <MenuListItem key={i} item={item}/>
+        ))}
+      </ul>
+    </main>
    </div>
   );
 }

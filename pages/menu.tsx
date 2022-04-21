@@ -6,7 +6,6 @@ import AddToCart from '../components/AddToCartButton';
 import { CategoriesNav } from '../components/CategoriesNav';
 import { MenuListItem } from '../components/MenuListItem';
 
-
 type Props = any;
 
 const Menu: NextPage = ({ categories, menu }: any) => (
@@ -25,7 +24,7 @@ const Menu: NextPage = ({ categories, menu }: any) => (
         ))}
         </ul>
 
-          <ul>
+          <ul className={styles.menuList}>
             {menu.items.map((item: any, i:number) => (
               <MenuListItem key={i} item={item}/>
             ))}
