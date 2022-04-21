@@ -1,6 +1,9 @@
 import { GetServerSideProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 import { MenuListItem } from '../../components/MenuListItem';
+import { Layout } from '../../components/layout/Layout';
+import { NavBar } from '../../components/layout/NavBar';
+import { Login } from '../../components/user/Login';
 import styles from '../../styles/Home.module.css';
 
 function Category({ category, filtered }:any) {
@@ -9,14 +12,22 @@ function Category({ category, filtered }:any) {
     <Head>
      <title>{category.title}</title>
     </Head>
-    <main>
-      <h1>{category.title}</h1>
-      <ul className={styles.menuList}>
-        {filtered.map((item: any, i:number) => (
-          <MenuListItem key={i} item={item}/>
-        ))}
-      </ul>
-    </main>
+    <Layout
+      title="Veitingarstaðurinn Góði"
+      header={(<NavBar cartItems={0}/>)}
+      footer={(
+        <Login />
+      )}
+    >
+      <main>
+        <h1>{category.title}</h1>
+        <ul className={styles.menuList}>
+          {filtered.map((item: any, i:number) => (
+            <MenuListItem key={i} item={item}/>
+          ))}
+        </ul>
+      </main>
+    </Layout>
    </div>
   );
 }
