@@ -26,13 +26,14 @@ const findTOKEN = () => {
   const localUser = JSON.parse(localStorage.getItem('user') || 'null');
   let token = 'null';
   if (localUser !== 'null') {
-    token = localUser.token;
+    token = localUser?.token;
   }
   return token;
 };
 
 export const postCategories = async ({ title }:CategoriesItems) => {
   const token = findTOKEN();
+  console.info(token);
   const response = await fetch(`${BASE_URL}categories`, {
     method: 'POST',
     body: JSON.stringify({ title }),
@@ -41,19 +42,20 @@ export const postCategories = async ({ title }:CategoriesItems) => {
       Authorization: `Bearer ${token}`,
     },
   });
+  console.info(response);
   // Ef ekki gengur að ná setja in category á að taka user af localstorage
   if (!response.ok) {
     await localStorage.setItem('user', 'null');
-    const message = await response.json();
-    return ({ message });
+    return false;
   }
 
-  const catagory : CategoriesItems = await response.json();
-  return ({ catagory });
+  const catagory = await response.json();
+  return (catagory);
 };
 
 export const deleteCategories = async (id:string) => {
   const token = findTOKEN();
+  console.info(token);
   const response = await fetch(`${BASE_URL}categories/${id}`, {
     method: 'DELETE',
     headers: {
@@ -63,9 +65,29 @@ export const deleteCategories = async (id:string) => {
   });
   if (!response.ok) {
     await localStorage.setItem('user', 'null');
-    const message = await response.json();
-    return ({ message });
+    return false;
   }
 
   return true;
+};
+export const patchCategories = async ({ title, id }:CategoriesItems) => {
+  const token = findTOKEN();
+  console.info(token);
+  const response = await fetch(`${BASE_URL}categories/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ title }),
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.info(response);
+  // Ef ekki gengur að ná setja in category á að taka user af localstorage
+  if (!response.ok) {
+    // await localStorage.setItem('user', 'null');
+    return false;
+  }
+
+  const catagory = await response.json();
+  return (catagory);
 };

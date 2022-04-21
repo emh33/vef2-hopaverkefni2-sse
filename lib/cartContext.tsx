@@ -18,20 +18,20 @@ export function CartContext({ children }: any) : JSX.Element {
         const response = await fetch(url, { method: 'POST' });
         const json = await response.json();
         setCart(json);
-        console.info('jsn: ', json);
+        // console.info('jsn: ', json);
       } catch (error) {
-        console.log('error', error);
+        // console.log('error', error);
       }
     };
 
-    console.info('cltest:', cart);
+    // console.info('cltest:', cart);
     const c = localStorage.getItem('cart');
-    console.info('cltest2: ', c);
+    // console.info('cltest2: ', c);
     if (c == null) {
       fetchData();
     }
   }, []);
-  console.info('cltest3:', cart);
+  // console.info('cltest3:', cart);
   return (
       <AppContext.Provider value={{
         cart,

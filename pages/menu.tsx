@@ -6,6 +6,7 @@ import AddToCart from '../components/AddToCartButton';
 import { CategoriesNav } from '../components/CategoriesNav';
 import { MenuListItem } from '../components/MenuListItem';
 
+
 type Props = any;
 
 const Menu: NextPage = ({ categories, menu }: any) => (
