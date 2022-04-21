@@ -2,13 +2,12 @@ import Link from 'next/link';
 import {
   useContext,
 } from 'react';
-import { ButtonLink } from '../../components/admin/ButtonLink';
 import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
 import { AppContext } from '../../lib/userContext';
 
-export default function Admin(): JSX.Element {
+export default function Menu(): JSX.Element {
   const { loggedin } = useContext(AppContext);
   return (
       <>
@@ -21,12 +20,7 @@ export default function Admin(): JSX.Element {
         >
         {loggedin && (
           <div>
-            <h2>Velkominn á starfsmanna síðuna</h2>
-            <div>
-              <span>Búa til, eyða eða breyta: </span>
-              <ButtonLink href={'/admin/category'}>Flokkur</ButtonLink>
-              <ButtonLink href={'/admin/menu'}>Matseðill</ButtonLink>
-            </div>
+              <h2>Menu síða fyrir admin</h2>
           </div>
         )}
         {!loggedin && (

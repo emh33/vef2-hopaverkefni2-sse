@@ -11,12 +11,16 @@ export function Login():JSX.Element {
     context.logoutUser();
     Router.push('/');
   };
+
   if (context.loggedin) {
     return (
       <>
         <p>
           Þú ert skráður inn sem <strong>{context.user?.username}</strong>
         </p>
+        <p>
+        <Link href="/admin">Fara á starfsmannavef</Link>
+      </p>
         <button type="button" onClick={onLogout}>Útskrá</button>
       </>
     );
