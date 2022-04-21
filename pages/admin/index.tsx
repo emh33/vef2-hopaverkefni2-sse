@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import {
   useContext,
 } from 'react';
 import { ButtonLink } from '../../components/admin/ButtonLink';
+import { AdminLayout } from '../../components/admin/index/Layout';
 import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
@@ -22,11 +22,7 @@ export default function Admin(): JSX.Element {
         {loggedin && (
           <div>
             <h2>Velkominn á starfsmanna síðuna</h2>
-            <div>
-              <span>Búa til, eyða eða breyta: </span>
-              <ButtonLink href={'/admin/category'}>Flokkur</ButtonLink>
-              <ButtonLink href={'/admin/menu'}>Matseðill</ButtonLink>
-            </div>
+            <AdminLayout/>
           </div>
         )}
         {!loggedin && (

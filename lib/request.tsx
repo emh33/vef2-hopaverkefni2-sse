@@ -30,8 +30,11 @@ const findTOKEN = () => {
   }
   return token;
 };
+export type PostCategory = {
+  title:string
+};
 
-export const postCategories = async ({ title }:CategoriesItems) => {
+export const postCategories = async ({ title }:PostCategory) => {
   const token = findTOKEN();
   console.info(token);
   const response = await fetch(`${BASE_URL}categories`, {

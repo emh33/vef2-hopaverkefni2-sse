@@ -33,7 +33,7 @@ export type Categories = {
 };
 
 export type CategoriesItems = {
-  id?:number,
+  id:number,
   title:string
 };
 

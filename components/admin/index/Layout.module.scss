@@ -1,0 +1,15 @@
+@import '../../../styles/config';
+.layout {
+    display: flex;
+    flex-direction: column;
+  
+    &__group{
+        display: flex;
+        flex-direction: row;
+        p {
+            align-self: center;
+            margin-right:auto ;
+        }
+    }
+
+}

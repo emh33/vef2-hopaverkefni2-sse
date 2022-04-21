@@ -11,7 +11,7 @@ function errorPage(): JSX.Element {
         <Link href="./">Til baka</Link>
       )}
     >
-      <h1>404 - Þessi síða er ekki til</h1>
+      <h3>404 - Þessi síða er ekki til</h3>
     </Layout>
   );
 }

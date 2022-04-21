@@ -2,12 +2,13 @@
 .buttonLink {
   border: 1px solid #fff;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 2rem;
   transition: background-color ease-in 200ms, color ease-in 200ms;
   margin: 0.5rem;
 
   a{
     text-decoration: none;
+    font-size: 16px;
   }
   &:hover {
     color: var(--color-white);

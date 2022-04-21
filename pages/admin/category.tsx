@@ -1,6 +1,6 @@
 import { InferGetServerSidePropsType } from 'next';
 import { useContext } from 'react';
-import { AdminCategory } from '../../components/admin/ChangesCategory';
+import { AdminCategoryLayout } from '../../components/admin/category/Layout';
 import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
@@ -10,9 +10,6 @@ import { Categories } from '../../types';
 export default function Category(
   { categories } : InferGetServerSidePropsType<typeof getServerSideProps>,
 ): JSX.Element {
-  // ATH hvort við erum admin
-  // setja sem : Ef reynt er að skoða síðu sem ekki er heimild
-  // til að skoða skal birta að ekki sé heimild til að skoða.
   const { loggedin } = useContext(AppContext);
   return (
         <>
@@ -24,7 +21,7 @@ export default function Category(
             )}
           >
           {loggedin && (
-            <AdminCategory categories={categories}/>
+            <AdminCategoryLayout categories={categories}/>
           )}
           {!loggedin && (
             <h3>ekki er heimild til að skoða þessa síðu.</h3>
@@ -34,6 +31,7 @@ export default function Category(
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const getServerSideProps = async () => {
   const res = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/categories');
   const categories: Categories = (await res.json()) as Categories;
