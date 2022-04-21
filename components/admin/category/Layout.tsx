@@ -4,7 +4,7 @@ import { deleteCategories, patchCategories, postCategories } from '../../../lib/
 import { Categories, CategoriesItems } from '../../../types';
 import { Button } from '../../form/Button';
 import { AdminButton } from '../Button';
-import { InputAdmin } from '../input';
+import { Input } from '../Input';
 import s from './Layout.module.scss';
 
 export function AdminCategoryLayout({ categories }:any): JSX.Element {
@@ -86,7 +86,7 @@ export function AdminCategoryLayout({ categories }:any): JSX.Element {
             {editValues.map((item: CategoriesItems, i:number) => (
                 <div key={i}>
                   <form method="post" className={s.layout__container__items__edit}>
-                    <InputAdmin
+                    <Input
                     value={item.title}
                     name="title"
                     type="text"
@@ -99,7 +99,7 @@ export function AdminCategoryLayout({ categories }:any): JSX.Element {
             <div className={s.layout__container__items}>
             <p className={s.layout__container__items__title}>BÆTA VIÐ</p>
                 <form method="post" >
-                  <InputAdmin
+                  <Input
                     value={newCategory}
                     name="categories"
                     type="text"

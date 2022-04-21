@@ -7,7 +7,7 @@ type Props = {
   onChange: React.ChangeEventHandler<HTMLInputElement>
 };
 
-export function InputAdmin({
+export function Input({
   name, value, type, onChange,
 }:Props): JSX.Element {
   return (
