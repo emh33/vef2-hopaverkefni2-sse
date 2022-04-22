@@ -25,6 +25,7 @@ export function UserContext({ children }: any) : JSX.Element {
       setLoggedin(true);
     } else {
       setLoggedin(false);
+      setUser(null);
     }
   }, []);
 
