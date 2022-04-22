@@ -123,7 +123,7 @@ export default function Order(): JSX.Element {
         <>
           <Layout
             title="Veitingarstaðurinn Góði"
-            header={(<NavBar cartItems={0}/>)}
+            header={(<NavBar cartItems={cart.cartCounter}/>)}
             footer={(
               <Login />
             )}

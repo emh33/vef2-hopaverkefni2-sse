@@ -31,7 +31,6 @@ export function CartContext({ children }: any) : JSX.Element {
           const json :Cart = await res.json();
           console.info('jsn: ', json);
           await localStorage.setItem('cart', JSON.stringify(json));
-          const items = json.lines;
           setCart(json);
         }
       }
