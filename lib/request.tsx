@@ -116,3 +116,21 @@ export const getPageMenu = async (url : string) => {
     pagesMenu: getMenu,
   });
 };
+
+export const deleteOnMenu = async (id:string) => {
+  const token = findTOKEN();
+  const response = await fetch(`${BASE_URL}menu/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    const message = await response.json();
+    return ({ message });
+  }
+  console.info(response);
+
+  return true;
+};

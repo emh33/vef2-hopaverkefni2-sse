@@ -1,15 +1,15 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AdminButton } from '../../components/admin/Button';
 import { Button } from '../../components/form/Button';
 import { Input } from '../../components/form/Input';
 import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
-import { getPageMenu } from '../../lib/request';
+import { deleteOnMenu, getPageMenu } from '../../lib/request';
 import { AppContext } from '../../lib/userContext';
 import {
-  Categories, CategoriesItems, Menu as GetMenu, MenuItems, MenuLinks,
+  Categories, Menu as GetMenu, MenuItems, MenuLinks,
 } from '../../types';
 
 export default function Menu(
@@ -23,20 +23,31 @@ export default function Menu(
   const [menuList, setMenuList] = useState<MenuItems[]>(itemsMenu);
   const [pageLinks, setPageLinks] = useState< MenuLinks >(menuLinks);
 
-  const [newMenu, setNewMenu] = useState<MenuItems>({
+  const [newOnMenu, setNewOnMenu] = useState<MenuItems>({
     category: 1,
     description: '',
     image: '',
     price: 1,
     title: '',
   });
-  const [category, setCategory] = useState('Kjöt'); // laga þetta fyrir select
+
+  const addCategory = async () : Promise <void> => {
+    /* const post = await postCategories({ title: newCategory });
+    if (post) {
+      const { id, title } = post;
+       setCategory((prevArray) => [...prevArray, { id, title }]);
+       setEditValues((prevArray) => [...prevArray, { id, title }]);
+    }
+     setNewCategory(''); */
+  };
 
   const deleteItem = async (e:any) : Promise <void> => {
     e.preventDefault();
     const id = e.target.value;
-    // const req = await (id); Gera request á DELETE
-    setMenuList(menuList.filter((item) => item.id !== Number(id)));
+    const req = await deleteOnMenu(id);
+    if (req) {
+      setMenuList(menuList.filter((item) => item.id !== Number(id)));
+    }
   };
 
   const editCategory = async (e:any) : Promise <void> => {
@@ -47,7 +58,9 @@ export default function Menu(
 
   const changeHandler = () => (e:React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewMenu((prevState) => ({
+    console.log(value);
+    // console.log(typeof value);
+    setNewOnMenu((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -76,22 +89,6 @@ export default function Menu(
       }
     }
   };
-
-  /* useEffect(() => {
-    if (pageLinks.next) {
-      setPage((prevState) => ({
-        ...prevState,
-        next: true,
-      }));
-    }
-    if (pageLinks.pref) {
-      setPage((prevState) => ({
-        ...prevState,
-        pref: true,
-      }));
-    }
-  }, [pageLinks]); */
-
   return (
       <>
         <Layout
@@ -123,27 +120,31 @@ export default function Menu(
                   label="Nafn á vöru"
                   name="title"
                   type="text"
-                  onChange={changeHandler}
+                  onChange={changeHandler()}
                 />
                 <Input
                   label="Verð í krónum"
                   name="price"
                   type="number"
-                  onChange={changeHandler}
+                  onChange={changeHandler()}
                 />
                 <Input
                   label="Lýsing á vöru"
                   name="description"
-                  type="number"
-                  onChange={changeHandler}
+                  type="text"
+                  onChange={changeHandler()}
                 />
                  <label htmlFor="category"> Flokkur </label>
-                  <select id="category" name="category"
-                  value={category} onChange={changeHandler} >
+                  <select name="category"
+                   onChange={changeHandler()} >
                     {itemCategory.map((item, i:number) => (
                         <option key={i} value={item.title}>{item.title}</option>
                     ))}
                   </select>
+                  <input type="file"
+                  id="image" name="image"
+                  accept="image/png, image/jpeg"
+                  onChange={changeHandler()}></input>
                 <Button >Bæta við vöru</Button>
               </form>
           </div>
