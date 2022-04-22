@@ -1,12 +1,13 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { useContext, useState } from 'react';
+import router from 'next/router';
+import { useContext, useRef, useState } from 'react';
 import { AdminButton } from '../../components/admin/Button';
 import { Button } from '../../components/form/Button';
 import { Input } from '../../components/form/Input';
 import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
-import { deleteOnMenu, getPageMenu } from '../../lib/request';
+import { deleteOnMenu, getPageMenu, postMenu } from '../../lib/request';
 import { AppContext } from '../../lib/userContext';
 import {
   Categories, Menu as GetMenu, MenuItems, MenuLinks,
@@ -22,16 +23,17 @@ export default function Menu(
   const [menuRes, setMenuRes] = useState<GetMenu>(menu);
   const [menuList, setMenuList] = useState<MenuItems[]>(itemsMenu);
   const [pageLinks, setPageLinks] = useState< MenuLinks >(menuLinks);
-
-  const [newOnMenu, setNewOnMenu] = useState<MenuItems>({
-    category: 1,
+  const [newOnMenu, setNewOnMenu] = useState({
+    category: '',
     description: '',
     image: '',
-    price: 1,
+    price: '',
     title: '',
   });
 
-  const addCategory = async () : Promise <void> => {
+  const addItem = async () : Promise <void> => {
+    const post = await postMenu(newOnMenu);
+    console.info(post);
     /* const post = await postCategories({ title: newCategory });
     if (post) {
       const { id, title } = post;
@@ -45,25 +47,30 @@ export default function Menu(
     e.preventDefault();
     const id = e.target.value;
     const req = await deleteOnMenu(id);
-    if (req) {
-      setMenuList(menuList.filter((item) => item.id !== Number(id)));
-    }
+    if (req) { setMenuList(menuList.filter((item) => item.id !== Number(id))); }
+    if (!req) { router.push('/'); }
   };
 
-  const editCategory = async (e:any) : Promise <void> => {
+  const editItem = async (e:any) : Promise <void> => {
     e.preventDefault();
     const { value } = e.target;
     console.info(value);
   };
 
-  const changeHandler = () => (e:React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    console.log(value);
-    // console.log(typeof value);
+  const changeHandler = () => (e:any) => {
+    const { name } = e.target;
+    let { value } = e.target;
+    console.log(name);
+    if (name === 'image') {
+      value = e.target?.files[0];
+      console.log(value);
+    }
+
     setNewOnMenu((prevState) => ({
       ...prevState,
       [name]: value,
     }));
+    console.log(newOnMenu);
   };
 
   const pageHandler = async (e: any):Promise<void> => {
@@ -89,6 +96,7 @@ export default function Menu(
       }
     }
   };
+
   return (
       <>
         <Layout
@@ -105,7 +113,7 @@ export default function Menu(
                 <div key={i}>
                  <p>{item.title}</p>
                   <AdminButton value={item.id} onClick={deleteItem}>Eyða</AdminButton>
-                  <AdminButton value={item.id} onClick={editCategory}>Breyta</AdminButton>
+                  <AdminButton value={item.id} onClick={editItem}>Breyta</AdminButton>
                 </div>
                 ))}
                 {pageLinks.prev && (
@@ -138,14 +146,14 @@ export default function Menu(
                   <select name="category"
                    onChange={changeHandler()} >
                     {itemCategory.map((item, i:number) => (
-                        <option key={i} value={item.title}>{item.title}</option>
+                        <option key={i} value={item.id}>{item.title}</option>
                     ))}
                   </select>
                   <input type="file"
                   id="image" name="image"
-                  accept="image/png, image/jpeg"
+                  accept="image/png, image/jpeg" required
                   onChange={changeHandler()}></input>
-                <Button >Bæta við vöru</Button>
+                <Button onClick={addItem}>Bæta við vöru</Button>
               </form>
           </div>
         )}

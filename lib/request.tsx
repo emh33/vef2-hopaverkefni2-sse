@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { CategoriesItems, Menu, User } from '../types/index';
+import {
+  CategoriesItems, Menu, MenuItems, User,
+} from '../types/index';
 
 const BASE_URL = 'https://vef2-2022-h1-synilausn.herokuapp.com/';
 
@@ -128,9 +130,39 @@ export const deleteOnMenu = async (id:string) => {
   });
   if (!response.ok) {
     const message = await response.json();
-    return ({ message });
+    if (message.error === 'expired token' || message.error === 'invalid token') {
+      await localStorage.setItem('user', 'null');
+    }
+    return false;
   }
   console.info(response);
+
+  return true;
+};
+
+export const postMenu = async ({
+  category, description, image, price, title,
+}:any) => {
+  const token = findTOKEN();
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('price', price);
+  formData.append('description', description);
+  formData.append('category', category);
+  formData.append('image', image);
+
+  const response = await fetch(`${BASE_URL}menu`, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const message = await response.json();
+    return ({ message });
+  }
 
   return true;
 };
