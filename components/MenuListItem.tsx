@@ -12,12 +12,8 @@ export function MenuListItem({ item }:{ item:MenuItems }): JSX.Element {
   const addToCart = async (e:any) : Promise <void> => {
     e.preventDefault();
     const { value: id } = e.target;
-    console.info(id);
-    console.info(context.cart);
     if (context.cart) {
-      const post = await postOnCart(id, 1, context.cart.id);
-      console.info(post);
-      context.counter();
+      await postOnCart(id, 1, context.cart.id);
     }
   };
   return (
