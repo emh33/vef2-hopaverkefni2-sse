@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { deleteCategories, patchCategories, postCategories } from '../../../lib/request';
 import { Categories, CategoriesItems } from '../../../types';
 import { Button } from '../../form/Button';
-import { AdminButton } from '../Button';
+import { AdminButton } from '../../buttons/Button';
 import { Input } from '../Input';
 import s from './Layout.module.scss';
 
@@ -50,7 +50,6 @@ export function AdminCategoryLayout({ categories } :any): JSX.Element {
     e.preventDefault();
     const { target } = e;
     const id = target.value;
-    console.info(id);
     let value = '';
     editValues.forEach((item) => {
       if (item.id === Number(id)) {

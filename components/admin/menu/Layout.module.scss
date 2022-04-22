@@ -1,0 +1,29 @@
+@import '../../../styles/config';
+.layout {
+    &__menulist{
+        display: flex;
+        flex-direction: column;
+        &__changes{
+            display: flex;
+            flex-direction: row;
+            justify-content:space-around;
+            border-bottom:solid rgb(107, 104, 104) ;
+            padding: 1rem 0;
+        }
+        &__item{
+            max-width: 500px;
+            display: flex;
+            flex-direction: row;
+            &__delete{
+                margin: 1rem;
+                align-self:center;
+          
+            }
+        }
+        &__pagebutton{
+            display: flex;
+            flex-direction: row;
+            justify-content:space-around;
+        }
+    }
+}

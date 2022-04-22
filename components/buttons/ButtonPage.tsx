@@ -1,15 +1,14 @@
 import classnames from 'classnames';
-import s from './Button.module.scss';
+import s from './ButtonPage.module.scss';
 
 type Props = {
   children: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  disabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLElement>,
   value?:number | string,
+  disabled?: boolean;
 };
-
-export function Button({
-  children, onClick, disabled = false, value,
+export function ButtonPage({
+  children, onClick, value, disabled = false,
 }: Props): JSX.Element {
   return (
     <button

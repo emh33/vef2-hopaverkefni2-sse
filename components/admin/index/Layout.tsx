@@ -1,4 +1,4 @@
-import { ButtonLink } from '../ButtonLink';
+import { ButtonLink } from '../../buttons/ButtonLink';
 import s from './Layout.module.scss';
 
 export function AdminLayout() : JSX.Element {

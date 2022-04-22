@@ -1,7 +1,7 @@
 import {
   useContext,
 } from 'react';
-import { ButtonLink } from '../../components/admin/ButtonLink';
+import { ButtonLink } from '../../components/buttons/ButtonLink';
 import { AdminLayout } from '../../components/admin/index/Layout';
 import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
