@@ -18,6 +18,8 @@ npm run start
 
 ## Test
 
+Til að keyra test er hægt að nota skipunina: npm run cypress:open
+
 ## Notast er við bakenda af sýnilausn h1
 
 https://vef2-2022-h1-synilausn.herokuapp.com

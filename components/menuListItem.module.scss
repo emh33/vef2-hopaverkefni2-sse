@@ -12,8 +12,8 @@
 .menuItem:hover,
 .menuItem:focus,
 .menuItem:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: #663;
+  border-color: #663;
 }
 .menuImgWrapper{
 	position: relative;
@@ -29,6 +29,19 @@
 }
 
 .menuItemTitle,
-.menuItemDesc {
+.menuItemDesc,
+.menuItemPrice {
 	padding: 0.2rem;
+}
+
+.addCartWrapper{
+	width: 100%;
+}
+.addCartButton{
+	background-color: inherit +1%;
+	border: none;
+	border-radius: 10px;
+	font-weight: 700;
+	height: 100%;
+	width: 100%;
 }
