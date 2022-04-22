@@ -1,19 +1,25 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
-import { useContext, useRef, useState } from 'react';
+import { useState } from 'react';
 import styles from '../styles/Home.module.css';
 import s from '../components/admin/menu/Layout.module.scss';
 import { Layout } from '../components/layout/Layout';
 import { NavBar } from '../components/layout/NavBar';
 import { Login } from '../components/user/Login';
 import { CategoriesNav } from '../components/CategoriesNav';
+<<<<<<< HEAD
 import { ButtonPage } from '../components/buttons/ButtonPage';
 import { getPageMenu } from '../lib/request';
 import { MenuListItem } from '../components/MenuListItem';
 import {
   Categories, Menu as GetMenu, MenuItems, LinksType,
 } from '../types';
+=======
+import { getPageMenu } from '../lib/request';
+import { MenuListItem } from '../components/MenuListItem';
+import { Menu as GetMenu, MenuItems, LinksType } from '../types';
+import { ButtonPage } from '../components/buttons/ButtonPage';
+>>>>>>> 2ca1c7c548db9e4a536dea61564f49860c97a068
 
 type Props = any;
 
@@ -21,8 +27,11 @@ const Menu: NextPage = ({ categories, menu }: any) => {
   const { items: itemsMenu, _links: menuLinks } = (menu) as GetMenu;
   const [menuRes, setMenuRes] = useState<GetMenu>(menu);
   const [menuList, setMenuList] = useState<MenuItems[]>(itemsMenu);
+<<<<<<< HEAD
   const [errors, setError] = useState<string[]>([]);
   const [editValues, setEditValues] = useState<MenuItems[]>(itemsMenu);
+=======
+>>>>>>> 2ca1c7c548db9e4a536dea61564f49860c97a068
   const [pageLinks, setPageLinks] = useState< LinksType >(menuLinks);
 
   const pageHandler = async (e: any):Promise<void> => {
@@ -76,6 +85,7 @@ const Menu: NextPage = ({ categories, menu }: any) => {
                 <MenuListItem key={i} item={item}/>
               ))}
             </ul>
+<<<<<<< HEAD
             <div className={s.layout__menulist__pagebutton}>
               {pageLinks.prev && (
                 <ButtonPage value='prev' onClick={pageHandler}>Fyrri síða</ButtonPage>
@@ -84,6 +94,14 @@ const Menu: NextPage = ({ categories, menu }: any) => {
                 <ButtonPage value='next' onClick={pageHandler}>Næsta síða</ButtonPage>
               )}
             </div>
+=======
+            {pageLinks.prev && (
+              <ButtonPage value='prev' onClick={pageHandler}>Fyrri síða</ButtonPage>
+            )}
+            {pageLinks.next && (
+              <ButtonPage value='next' onClick={pageHandler}>Næsta síða</ButtonPage>
+            )}
+>>>>>>> 2ca1c7c548db9e4a536dea61564f49860c97a068
         </main>
       </Layout>
     </div>

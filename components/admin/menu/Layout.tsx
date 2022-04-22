@@ -2,7 +2,7 @@ import router from 'next/router';
 import Image from 'next/image';
 import { useState } from 'react';
 import {
-  deleteOnMenu, getPageMenu, postMenu,
+  deleteOnMenu, getPageMenu, patchMenu, postMenu,
 } from '../../../lib/request';
 import {
   Categories, LinksType, Menu as GetMenu, MenuItems,
@@ -60,26 +60,46 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
     e.preventDefault();
     const { target } = e;
     const id = target.value;
-    let value = '';
-    editValues.forEach((item) => {
+    let editMenu = editValues[0];
+    editValues.forEach((item:MenuItems) => {
       if (item.id === Number(id)) {
-        value = item.title;
+        editMenu = item;
       }
     });
-    // const patch = await patchCategories({ title: value, id });
+    const patch = await patchMenu(editMenu);
+    console.log(`patch${patch.editMenu}`);
+
+    setMenuList(
+      menuList.map((item) => (item.id === Number(id)
+        ? editMenu
+        : item)),
+    );
   };
 
-  const changeHandler = () => (e:any) => {
+  const changeHandlerNewMenu = () => (e:any) => {
     const { name } = e.target;
     let { value } = e.target;
     if (name === 'image') {
       value = e.target?.files[0];
     }
-
     setNewOnMenu((prevState) => ({
       ...prevState,
       [name]: value,
     }));
+
+  };
+  const changeHandlerEditMenu = (index:number) => (e:any) => {
+    const { name } = e.target;
+    let { value } = e.target;
+    if (name === 'image') {
+      value = e.target?.files[0];
+    }
+    setEditValues(
+      editValues.map((item) => (index === item.id
+        ? { ...item, [name]: value }
+        : item)),
+    );
+
   };
 
   const pageHandler = async (e: any):Promise<void> => {
@@ -90,6 +110,7 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
       if (res) {
         const { pageMenu, link, pagesMenu } = res;
         setMenuList(pageMenu);
+        setEditValues(pageMenu);
         setPageLinks(link);
         setMenuRes(pagesMenu);
       }
@@ -100,6 +121,7 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
       if (res) {
         const { pageMenu, link, pagesMenu } = res;
         setMenuList(pageMenu);
+        setEditValues(pageMenu);
         setPageLinks(link);
         setMenuRes(pagesMenu);
       }
@@ -118,28 +140,30 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
                     <p>{item.title}</p>
                     <p>{item.description}</p>
                     <p>{item.price}.kr</p>
+
                     <Button value={item.id} onClick={deleteItem}>Eyða</Button>
                 </div>
             </div>
             <div className={s.layout__menulist__item}>
               <form method="post">
+
                   <InputList
                   label={['Nafn á vöru', 'Verð í krónum', 'Lýsing á vöru']}
                   name={['title', 'price', 'description']}
                   type={['text', 'number', 'text']}
-                  onChange={changeHandler()}
+                  onChange={changeHandlerEditMenu(item.id)}
                   />
                     <label htmlFor="category"> Flokkur </label>
                     <select name="category"
-                   onChange={changeHandler()} >
-                    {itemCategory.map((categoryItem, numb:number) => (
+                   onChange={changeHandlerEditMenu(item.id)} >
+                    {itemCategory.map((categoryItem, numb) => (
                         <option key={numb} value={categoryItem.id}>{categoryItem.title}</option>
                     ))}
                     </select>
                     <input type="file"
                     id="image" name="image"
-                    accept="image/png, image/jpeg" required
-                    onChange={changeHandler()}></input>
+                    accept="image/png, image/jpeg"
+                    onChange={changeHandlerEditMenu(item.id)}></input>
                     <Button value={item.id} onClick={editItem}>Breyta</Button>
               </form>
             </div>
@@ -156,22 +180,22 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
               </div>
               <form method="post">
                 <InputList
-                label={['Nafn á vöru', 'Verð í krónum', 'Lýsing á vöru']}
+                label={['Nafn á vöru *', 'Verð í krónum *', 'Lýsing á vöru']}
                 name={['title', 'price', 'description']}
                 type={['text', 'number', 'text']}
-                onChange={changeHandler()}
+                onChange={changeHandlerNewMenu()}
                 />
-                 <label htmlFor="category"> Flokkur </label>
+                 <label htmlFor="category"> Flokkur *</label>
                   <select name="category"
-                   onChange={changeHandler()} >
-                    {itemCategory.map((item, i:number) => (
+                   onChange={changeHandlerNewMenu()} >
+                    {itemCategory.map((item, i) => (
                         <option key={i} value={item.id}>{item.title}</option>
                     ))}
                   </select>
                   <input type="file"
                   id="image" name="image"
                   accept="image/png, image/jpeg" required
-                  onChange={changeHandler()}></input>
+                  onChange={changeHandlerNewMenu()}></input>
                 <Button onClick={addItem}>Bæta við vöru</Button>
               </form>
               <ErrorsComponent errors={errors}/>
