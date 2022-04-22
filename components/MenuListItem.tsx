@@ -13,7 +13,9 @@ export function MenuListItem({ item }:{ item:MenuItems }): JSX.Element {
     e.preventDefault();
     const { value: id } = e.target;
     if (context.cart) {
-      await postOnCart(id, 1, context.cart.id);
+      const post = await postOnCart(id, 1, context.cart.id);
+      console.info(post);
+      context.counter();
     }
   };
   return (
