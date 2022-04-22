@@ -3,15 +3,16 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useRef, useState } from 'react';
 import styles from '../styles/Home.module.css';
+import s from '../components/admin/menu/Layout.module.scss';
 import { Layout } from '../components/layout/Layout';
 import { NavBar } from '../components/layout/NavBar';
 import { Login } from '../components/user/Login';
 import { CategoriesNav } from '../components/CategoriesNav';
-import { AdminButton } from '../components/admin/Button';
+import { ButtonPage } from '../components/buttons/ButtonPage';
 import { getPageMenu } from '../lib/request';
 import { MenuListItem } from '../components/MenuListItem';
 import {
-  Categories, Menu as GetMenu, MenuItems, MenuLinks,
+  Categories, Menu as GetMenu, MenuItems, LinksType,
 } from '../types';
 
 type Props = any;
@@ -20,7 +21,9 @@ const Menu: NextPage = ({ categories, menu }: any) => {
   const { items: itemsMenu, _links: menuLinks } = (menu) as GetMenu;
   const [menuRes, setMenuRes] = useState<GetMenu>(menu);
   const [menuList, setMenuList] = useState<MenuItems[]>(itemsMenu);
-  const [pageLinks, setPageLinks] = useState< MenuLinks >(menuLinks);
+  const [errors, setError] = useState<string[]>([]);
+  const [editValues, setEditValues] = useState<MenuItems[]>(itemsMenu);
+  const [pageLinks, setPageLinks] = useState< LinksType >(menuLinks);
 
   const pageHandler = async (e: any):Promise<void> => {
     const { value } = e.target;
@@ -46,7 +49,7 @@ const Menu: NextPage = ({ categories, menu }: any) => {
     }
   };
 
-  return(
+  return (
     <div className={styles.container}>
       <Head>
         <title>Menu</title>
@@ -69,21 +72,23 @@ const Menu: NextPage = ({ categories, menu }: any) => {
             </ul>
 
             <ul className={styles.menuList}>
-              {menu.items.map((item: any, i:number) => (
+              {menuList.map((item: any, i:number) => (
                 <MenuListItem key={i} item={item}/>
               ))}
             </ul>
-            {pageLinks.prev && (
-              <AdminButton value='prev' onClick={pageHandler}>Fyrri síða</AdminButton>
-            )}
-            {pageLinks.next && (
-              <AdminButton value='next' onClick={pageHandler}>Næsta síða</AdminButton>
-            )}
+            <div className={s.layout__menulist__pagebutton}>
+              {pageLinks.prev && (
+                <ButtonPage value='prev' onClick={pageHandler}>Fyrri síða</ButtonPage>
+              )}
+              {pageLinks.next && (
+                <ButtonPage value='next' onClick={pageHandler}>Næsta síða</ButtonPage>
+              )}
+            </div>
         </main>
       </Layout>
     </div>
- );
-}
+  );
+};
 export async function getServerSideProps() {
   const categoriesRes = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/categories');
   const categories = await categoriesRes.json();

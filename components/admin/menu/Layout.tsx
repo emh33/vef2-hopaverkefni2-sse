@@ -72,17 +72,14 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
   const changeHandler = () => (e:any) => {
     const { name } = e.target;
     let { value } = e.target;
-    console.log(name);
     if (name === 'image') {
       value = e.target?.files[0];
-      console.log(value);
     }
 
     setNewOnMenu((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    console.log(newOnMenu);
   };
 
   const pageHandler = async (e: any):Promise<void> => {
