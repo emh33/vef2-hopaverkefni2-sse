@@ -28,3 +28,8 @@ https://vef2-2022-h1-synilausn.herokuapp.com
 
 - username: admin
 - password: 1234567890
+
+## Hópmeðlimir
+
+- Eva Margrét Hrólfsdóttir ( emh33 )
+- Sturla Freyr Magnússon (Stulli888)

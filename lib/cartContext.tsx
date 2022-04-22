@@ -25,14 +25,12 @@ export function CartContext({ children }: any) : JSX.Element {
       }
     };
 
-    // console.info('cltest:', cart);
     const c = localStorage.getItem('cart');
-    // console.info('cltest2: ', c);
     if (c == null) {
       fetchData();
     }
   }, []);
-  // console.info('cltest3:', cart);
+
   return (
       <AppContext.Provider value={{
         cart,

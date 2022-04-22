@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import {
-  CategoriesItems, Menu, User,
+  CategoriesItems, Menu, OrdersType, User,
 } from '../types/index';
 
 const BASE_URL = 'https://vef2-2022-h1-synilausn.herokuapp.com/';
@@ -196,4 +196,50 @@ export const patchMenu = async ({
 
   const editMenu: Menu = await response.json();
   return ({ editMenu });
+};
+
+export const getPageOrder = async (url : string) => {
+  const token = findTOKEN();
+  const response = await
+  fetch(`${BASE_URL}${url}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    // await localStorage.setItem('user', 'null');
+    return false;
+  }
+
+  const getOrder : OrdersType = await response.json();
+
+  return ({
+    pagesItems: getOrder.items,
+    pagesOrder: getOrder,
+  });
+};
+
+export const postNextState = async (id:string, status:string) => {
+  const token = findTOKEN();
+  const response = await fetch(`${BASE_URL}orders/${id}/status`, {
+    method: 'POST',
+    body: JSON.stringify({ status }),
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  // Ef ekki gengur að ná setja in category á að taka user af localstorage
+  if (!response.ok) {
+    const message = await response.json();
+    console.info(message);
+    // await localStorage.setItem('user', 'null');
+    return false;
+  }
+
+  const orderState = await response.json();
+  return (orderState);
 };
