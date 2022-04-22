@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import router from 'next/router';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -66,8 +67,7 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
         editMenu = item;
       }
     });
-    const patch = await patchMenu(editMenu);
-    // console.log(`patch${patch.editMenu}`);
+    await patchMenu(editMenu);
 
     setMenuList(
       menuList.map((item) => (item.id === Number(id)

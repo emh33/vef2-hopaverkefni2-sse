@@ -1,0 +1,17 @@
+@import '../styles/config';
+
+.index {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &__img{
+        display: flex;
+        justify-content: center;
+    }
+    &__text{
+        display: flex;
+        justify-content: center;
+        font-style: italic;
+    }
+
+}
