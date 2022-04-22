@@ -169,3 +169,29 @@ export const postMenu = async ({
   const data = await response.json();
   return ({ data });
 };
+
+export const patchMenu = async ({
+  category, description, image, price, title, id,
+}:any) => {
+  const token = findTOKEN();
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('price', price);
+  formData.append('description', description);
+  formData.append('category', category);
+  formData.append('image', image);
+  const response = await fetch(`${BASE_URL}menu/${id}`, {
+    method: 'PATCH',
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    const message = await response.json();
+    return ({ message });
+  }
+
+  const editMenu: Menu = await response.json();
+  return ({ editMenu });
+};

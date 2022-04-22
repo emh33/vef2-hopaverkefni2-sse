@@ -53,7 +53,7 @@ export type Menu = {
 };
 
 export type MenuItems = {
-  id?:number,
+  id:number,
   title:string,
   price:number,
   description:string,
