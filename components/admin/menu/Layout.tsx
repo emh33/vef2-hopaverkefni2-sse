@@ -67,7 +67,7 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
       }
     });
     const patch = await patchMenu(editMenu);
-    console.log(`patch${patch.editMenu}`);
+    // console.log(`patch${patch.editMenu}`);
 
     setMenuList(
       menuList.map((item) => (item.id === Number(id)
@@ -86,7 +86,6 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
       ...prevState,
       [name]: value,
     }));
-
   };
   const changeHandlerEditMenu = (index:number) => (e:any) => {
     const { name } = e.target;
@@ -99,7 +98,6 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
         ? { ...item, [name]: value }
         : item)),
     );
-
   };
 
   const pageHandler = async (e: any):Promise<void> => {
