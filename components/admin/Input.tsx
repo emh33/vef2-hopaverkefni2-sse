@@ -4,7 +4,7 @@ type Props = {
   name:string,
   type: string,
   value:string,
-  onChange: React.ChangeEventHandler<HTMLInputElement>
+  onChange?: React.ChangeEventHandler<HTMLInputElement>
 };
 
 export function Input({

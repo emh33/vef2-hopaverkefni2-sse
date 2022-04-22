@@ -4,7 +4,7 @@ import s from './Button.module.scss';
 type Props = {
   children: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLElement>,
-  value?:number,
+  value?:number | string,
   disabled?: boolean;
 };
 

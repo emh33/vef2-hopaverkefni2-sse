@@ -49,24 +49,28 @@ export type Menu = {
   limit: number,
   offset: number,
   items: MenuItems[],
-  _links:{
-    self:{
-      href:string
-    }
-    next?:{
-      href:string
-    }
-  }
+  _links:MenuLinks
 };
 
 export type MenuItems = {
-  id:number,
+  id?:number,
   title:string,
   price:number,
   description:string,
   image:string,
   category:number,
-  created:string,
-  updated:string
+  created?:string,
+  updated?:string
+};
 
+export type MenuLinks = {
+  self:{
+    href:string
+  }
+  next?:{
+    href:string
+  }
+  prev?:{
+    href:string
+  }
 };

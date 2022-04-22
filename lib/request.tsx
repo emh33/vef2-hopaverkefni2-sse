@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { CategoriesItems, User } from '../types/index';
+import { CategoriesItems, Menu, User } from '../types/index';
 
 const BASE_URL = 'https://vef2-2022-h1-synilausn.herokuapp.com/';
 
@@ -73,9 +73,9 @@ export const deleteCategories = async (id:string) => {
 
   return true;
 };
+
 export const patchCategories = async ({ title, id }:CategoriesItems) => {
   const token = findTOKEN();
-  console.info(token);
   const response = await fetch(`${BASE_URL}categories/${id}`, {
     method: 'PATCH',
     body: JSON.stringify({ title }),
@@ -85,7 +85,6 @@ export const patchCategories = async ({ title, id }:CategoriesItems) => {
     },
   });
   console.info(response);
-  // Ef ekki gengur að ná setja in category á að taka user af localstorage
   if (!response.ok) {
     // await localStorage.setItem('user', 'null');
     return false;
@@ -93,4 +92,27 @@ export const patchCategories = async ({ title, id }:CategoriesItems) => {
 
   const catagory = await response.json();
   return (catagory);
+};
+
+export const getPageMenu = async (url : string) => {
+  const response = await
+  fetch(`${BASE_URL}${url}`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    // await localStorage.setItem('user', 'null');
+    return false;
+  }
+
+  const getMenu : Menu = await response.json();
+
+  return ({
+    pageMenu: getMenu.items,
+    // eslint-disable-next-line no-underscore-dangle
+    link: getMenu._links,
+    pagesMenu: getMenu,
+  });
 };

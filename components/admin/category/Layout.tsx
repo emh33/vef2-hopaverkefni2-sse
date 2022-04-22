@@ -7,7 +7,7 @@ import { AdminButton } from '../Button';
 import { Input } from '../Input';
 import s from './Layout.module.scss';
 
-export function AdminCategoryLayout({ categories }:any): JSX.Element {
+export function AdminCategoryLayout({ categories } :any): JSX.Element {
   const { items } = (categories) as Categories;
   const [newCategory, setNewCategory] = useState('');
   const [category, setCategory] = useState<CategoriesItems[]>(items);
