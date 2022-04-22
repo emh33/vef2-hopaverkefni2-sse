@@ -50,7 +50,6 @@ export function AdminCategoryLayout({ categories } :any): JSX.Element {
     e.preventDefault();
     const { target } = e;
     const id = target.value;
-    console.info(id);
     let value = '';
     editValues.forEach((item) => {
       if (item.id === Number(id)) {

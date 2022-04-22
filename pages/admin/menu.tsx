@@ -1,17 +1,18 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import router from 'next/router';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
+import Image from 'next/image';
 import { AdminButton } from '../../components/admin/Button';
 import { Button } from '../../components/form/Button';
-import { Input } from '../../components/form/Input';
 import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
 import { deleteOnMenu, getPageMenu, postMenu } from '../../lib/request';
 import { AppContext } from '../../lib/userContext';
 import {
-  Categories, Menu as GetMenu, MenuItems, MenuLinks,
+  Categories, LinksType, Menu as GetMenu, MenuItems,
 } from '../../types';
+import { InputList } from '../../components/admin/menu/InputList';
 
 export default function Menu(
   { menu, categories } : InferGetServerSidePropsType<typeof getServerSideProps>,
@@ -22,7 +23,8 @@ export default function Menu(
 
   const [menuRes, setMenuRes] = useState<GetMenu>(menu);
   const [menuList, setMenuList] = useState<MenuItems[]>(itemsMenu);
-  const [pageLinks, setPageLinks] = useState< MenuLinks >(menuLinks);
+  const [editValues, setEditValues] = useState<MenuItems[]>(itemsMenu);
+  const [pageLinks, setPageLinks] = useState< LinksType >(menuLinks);
   const [newOnMenu, setNewOnMenu] = useState({
     category: '',
     description: '',
@@ -53,8 +55,15 @@ export default function Menu(
 
   const editItem = async (e:any) : Promise <void> => {
     e.preventDefault();
-    const { value } = e.target;
-    console.info(value);
+    const { target } = e;
+    const id = target.value;
+    let value = '';
+    editValues.forEach((item) => {
+      if (item.id === Number(id)) {
+        value = item.title;
+      }
+    });
+    // const patch = await patchCategories({ title: value, id });
   };
 
   const changeHandler = () => (e:any) => {
@@ -111,11 +120,37 @@ export default function Menu(
               <div>
                 {menuList.map((item: MenuItems, i:number) => (
                 <div key={i}>
-                 <p>{item.title}</p>
-                  <AdminButton value={item.id} onClick={deleteItem}>Eyða</AdminButton>
-                  <AdminButton value={item.id} onClick={editItem}>Breyta</AdminButton>
+                <p>{item.title}</p>
+                <p>{item.description}</p>
+                <p>{item.price}.kr</p>
+                <Image src={item.image} width = {200} height= {200} />
+                <AdminButton value={item.id} onClick={deleteItem}>Eyða</AdminButton>
+
+                <form method="post">
+                  <InputList
+                  label={['Nafn á vöru', 'Verð í krónum', 'Lýsing á vöru']}
+                  name={['title', 'price', 'description']}
+                  type={['text', 'number', 'text']}
+                  onChange={changeHandler()}
+                  />
+
+                 <label htmlFor="category"> Flokkur </label>
+                  <select name="category"
+                   onChange={changeHandler()} >
+                    {itemCategory.map((categoryItem, numb:number) => (
+                        <option key={numb} value={categoryItem.id}>{categoryItem.title}</option>
+                    ))}
+                  </select>
+                  <input type="file"
+                  id="image" name="image"
+                  accept="image/png, image/jpeg" required
+                  onChange={changeHandler()}></input>
+                <AdminButton value={item.id} onClick={editItem}>Breyta</AdminButton>
+              </form>
+
                 </div>
                 ))}
+
                 {pageLinks.prev && (
                    <AdminButton value='prev' onClick={pageHandler}>Fyrri síða</AdminButton>
                 )}
@@ -124,23 +159,11 @@ export default function Menu(
                 )}
               </div>
               <form method="post">
-                <Input
-                  label="Nafn á vöru"
-                  name="title"
-                  type="text"
-                  onChange={changeHandler()}
-                />
-                <Input
-                  label="Verð í krónum"
-                  name="price"
-                  type="number"
-                  onChange={changeHandler()}
-                />
-                <Input
-                  label="Lýsing á vöru"
-                  name="description"
-                  type="text"
-                  onChange={changeHandler()}
+                <InputList
+                label={['Nafn á vöru', 'Verð í krónum', 'Lýsing á vöru']}
+                name={['title', 'price', 'description']}
+                type={['text', 'number', 'text']}
+                onChange={changeHandler()}
                 />
                  <label htmlFor="category"> Flokkur </label>
                   <select name="category"

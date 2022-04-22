@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import {
-  CategoriesItems, Menu, MenuItems, User,
+  CategoriesItems, Menu, User,
 } from '../types/index';
 
 const BASE_URL = 'https://vef2-2022-h1-synilausn.herokuapp.com/';
@@ -161,6 +161,10 @@ export const postMenu = async ({
 
   if (!response.ok) {
     const message = await response.json();
+    if (message.error === 'expired token' || message.error === 'invalid token') {
+      await localStorage.setItem('user', 'null');
+      return false;
+    }
     return ({ message });
   }
 

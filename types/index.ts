@@ -49,7 +49,7 @@ export type Menu = {
   limit: number,
   offset: number,
   items: MenuItems[],
-  _links:MenuLinks
+  _links:LinksType
 };
 
 export type MenuItems = {
@@ -63,7 +63,7 @@ export type MenuItems = {
   updated?:string
 };
 
-export type MenuLinks = {
+export type LinksType = {
   self:{
     href:string
   }
@@ -73,4 +73,18 @@ export type MenuLinks = {
   prev?:{
     href:string
   }
+};
+
+export type OrdersType = {
+  limit: number,
+  offset: number,
+  items: OrdersItems[],
+  _links:LinksType
+};
+
+export type OrdersItems = {
+  id:string,
+  created:string,
+  current_state:string,
+  current_state_created:string,
 };
