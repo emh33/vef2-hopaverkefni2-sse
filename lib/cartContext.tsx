@@ -44,6 +44,7 @@ export function CartContext({ children }: any) : JSX.Element {
         });
         if (res.ok) {
           const json :Cart = await res.json();
+          setCart(json);
           const items = json.lines;
           setCartCounter(`${items?.length}`);
         }
