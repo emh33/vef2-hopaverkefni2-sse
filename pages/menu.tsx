@@ -19,10 +19,6 @@ const Menu: NextPage = ({ categories, menu }
   const { items: itemsMenu, _links: menuLinks } = (menu) as GetMenu;
   const [menuRes, setMenuRes] = useState<GetMenu>(menu);
   const [menuList, setMenuList] = useState<MenuItems[]>(itemsMenu);
-
-  const [errors, setError] = useState<string[]>([]);
-  const [editValues, setEditValues] = useState<MenuItems[]>(itemsMenu);
-
   const [pageLinks, setPageLinks] = useState< LinksType >(menuLinks);
 
   const pageHandler = async (e: any):Promise<void> => {

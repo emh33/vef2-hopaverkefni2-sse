@@ -67,8 +67,7 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
         editMenu = item;
       }
     });
-    const patch = await patchMenu(editMenu);
-    // console.log(`patch${patch.editMenu}`);
+    await patchMenu(editMenu);
 
     setMenuList(
       menuList.map((item) => (item.id === Number(id)
