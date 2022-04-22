@@ -10,7 +10,8 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  margin: auto;
+  // margin: auto;
+  margin-top: 1rem;
 
   &:hover {
     background-color: var(--color-accent-dark);

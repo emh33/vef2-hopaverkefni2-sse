@@ -163,10 +163,9 @@ export const postMenu = async ({
     const message = await response.json();
     if (message.error === 'expired token' || message.error === 'invalid token') {
       await localStorage.setItem('user', 'null');
-      return false;
     }
     return ({ message });
   }
-
-  return true;
+  const data = await response.json();
+  return ({ data });
 };

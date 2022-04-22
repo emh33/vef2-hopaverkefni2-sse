@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { useContext } from 'react';
 import { AppContext } from '../../lib/userContext';
-import { AdminButton } from '../admin/Button';
+import { AdminButton } from '../buttons/Button';
 
 export function Login():JSX.Element {
   const context = useContext(AppContext);

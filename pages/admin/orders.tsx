@@ -1,8 +1,5 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import router from 'next/router';
-import {
-  useContext, useEffect, useState,
-} from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
@@ -47,7 +44,7 @@ export default function Order(): JSX.Element {
     }
 
     fetchOrders();
-  }, [loggedin]);
+  }, [loggedin, setLoading, setOrders]);
 
   if (loading) {
     return (<>
@@ -78,6 +75,7 @@ export default function Order(): JSX.Element {
             {orders.items.map((item, i) => (
               <div key={i}>
                 <p>{item.id}</p>
+                <p>{item.current_state_created}</p>
                 <p>{item.current_state}</p>
               </div>
             ))}
