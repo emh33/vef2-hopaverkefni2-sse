@@ -143,8 +143,7 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
                 </div>
             </div>
             <div className={s.layout__menulist__item}>
-              <form method="post">
-
+              <form method="post" className={s.layout__menulist__item__form}>
                   <InputList
                   label={['Nafn á vöru', 'Verð í krónum', 'Lýsing á vöru']}
                   name={['title', 'price', 'description']}
@@ -158,6 +157,7 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
                         <option key={numb} value={categoryItem.id}>{categoryItem.title}</option>
                     ))}
                     </select>
+                    <label htmlFor="image"> Mynd :</label>
                     <input type="file"
                     id="image" name="image"
                     accept="image/png, image/jpeg"
@@ -176,20 +176,21 @@ export function AdminMenuLayout({ menu, categories } : any): JSX.Element {
                 )}
             </div>
               </div>
-              <form method="post">
+              <form method="post" className={s.layout__menulist__item__form}>
                 <InputList
                 label={['Nafn á vöru *', 'Verð í krónum *', 'Lýsing á vöru']}
                 name={['title', 'price', 'description']}
                 type={['text', 'number', 'text']}
                 onChange={changeHandlerNewMenu()}
                 />
-                 <label htmlFor="category"> Flokkur *</label>
+                 <label htmlFor="category"> Flokkur *:</label>
                   <select name="category"
                    onChange={changeHandlerNewMenu()} >
                     {itemCategory.map((item, i) => (
                         <option key={i} value={item.id}>{item.title}</option>
                     ))}
                   </select>
+                  <label htmlFor="image"> Mynd *:</label>
                   <input type="file"
                   id="image" name="image"
                   accept="image/png, image/jpeg" required

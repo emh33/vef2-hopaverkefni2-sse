@@ -2,7 +2,6 @@
 .input {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
   width: 100%;
 
   label {
@@ -15,10 +14,5 @@
     flex: 1;
     padding: 8px;
     width: 100%;
-  }
-
-  &.invalid input {
-    background-color: var(--color-accent-light);
-    border-color: var(--color-accent);
   }
 }
