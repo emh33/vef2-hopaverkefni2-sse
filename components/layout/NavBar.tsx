@@ -2,7 +2,7 @@ import Link from 'next/link';
 import s from './NavBar.module.scss';
 
 type Props = {
-  cartItems:number;
+  cartItems:string;
 };
 
 export function NavBar({ cartItems }: Props) : JSX.Element {

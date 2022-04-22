@@ -1,13 +1,16 @@
 import { GetServerSideProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
+import { useContext } from 'react';
 import { MenuListItem } from '../../components/MenuListItem';
 import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
 import styles from '../../styles/Home.module.css';
 import { CategoriesItems, MenuItems } from '../../types';
+import { AppContextCart } from '../../lib/cartContext';
 
 function Category({ category, filtered } :any): JSX.Element {
+  const cart = useContext(AppContextCart);
   return (
    <div>
     <Head>
@@ -15,7 +18,7 @@ function Category({ category, filtered } :any): JSX.Element {
     </Head>
     <Layout
       title="Veitingarstaðurinn Góði"
-      header={(<NavBar cartItems={0}/>)}
+      header={(<NavBar cartItems={cart.cartCounter}/>)}
       footer={(
         <Login />
       )}

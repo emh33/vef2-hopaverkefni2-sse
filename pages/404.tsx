@@ -6,7 +6,7 @@ function errorPage(): JSX.Element {
   return (
     <Layout
       title="404"
-      header={(<NavBar cartItems={0}/>)}
+      header={(<NavBar cartItems={'0'}/>)}
       footer={(
         <Link href="./">Til baka</Link>
       )}

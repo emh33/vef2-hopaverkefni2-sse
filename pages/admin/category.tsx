@@ -4,6 +4,7 @@ import { AdminCategoryLayout } from '../../components/admin/category/Layout';
 import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
+import { AppContextCart } from '../../lib/cartContext';
 import { AppContext } from '../../lib/userContext';
 import { Categories } from '../../types';
 
@@ -11,11 +12,12 @@ export default function Category(
   { categories } : InferGetServerSidePropsType<typeof getServerSideProps>,
 ): JSX.Element {
   const { loggedin } = useContext(AppContext);
+  const context = useContext(AppContextCart);
   return (
         <>
           <Layout
             title="Veitingarstaðurinn Góði"
-            header={(<NavBar cartItems={0}/>)}
+            header={(<NavBar cartItems={context.cartCounter}/>)}
             footer={(
               <Login />
             )}

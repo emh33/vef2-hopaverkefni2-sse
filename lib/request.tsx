@@ -243,3 +243,22 @@ export const postNextState = async (id:string, status:string) => {
   const orderState = await response.json();
   return (orderState);
 };
+
+export const postOnCart = async (product:number, quantity:number, id:string) => {
+  const response = await fetch(`${BASE_URL}cart/${id}`, {
+    method: 'POST',
+    body: JSON.stringify({ product, quantity }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const message = await response.json();
+    console.info(message);
+    return false;
+  }
+
+  const orderState = await response.json();
+  return (orderState);
+};

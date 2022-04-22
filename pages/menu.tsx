@@ -1,6 +1,6 @@
 import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from '../styles/Home.module.css';
 import s from '../components/admin/menu/Layout.module.scss';
 import { Layout } from '../components/layout/Layout';
@@ -13,10 +13,12 @@ import { MenuListItem } from '../components/MenuListItem';
 import {
   Menu as GetMenu, MenuItems, LinksType, CategoriesItems,
 } from '../types';
+import { AppContextCart } from '../lib/cartContext';
 
 const Menu: NextPage = ({ categories, menu }
 : InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { items: itemsMenu, _links: menuLinks } = (menu) as GetMenu;
+  const context = useContext(AppContextCart);
   const [menuRes, setMenuRes] = useState<GetMenu>(menu);
   const [menuList, setMenuList] = useState<MenuItems[]>(itemsMenu);
   const [pageLinks, setPageLinks] = useState< LinksType >(menuLinks);
@@ -54,7 +56,7 @@ const Menu: NextPage = ({ categories, menu }
       </Head>
       <Layout
         title="Veitingarstaðurinn Góði"
-        header={(<NavBar cartItems={0}/>)}
+        header={(<NavBar cartItems={context.cartCounter}/>)}
         footer={(
           <Login />
         )}

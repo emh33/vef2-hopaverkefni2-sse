@@ -6,12 +6,14 @@ import { Button } from '../../components/form/Button';
 import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
+import { AppContextCart } from '../../lib/cartContext';
 import { getPageOrder, postNextState } from '../../lib/request';
 import { AppContext } from '../../lib/userContext';
 import { OrdersType } from '../../types';
 
 export default function Order(): JSX.Element {
   const { loggedin } = useContext(AppContext);
+  const cart = useContext(AppContextCart);
   const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState<OrdersType | null >(null);
 
@@ -102,7 +104,7 @@ export default function Order(): JSX.Element {
     return (<>
       <Layout
         title="Veitingarstaðurinn Góði"
-        header={(<NavBar cartItems={0}/>)}
+        header={(<NavBar cartItems={cart.cartCounter}/>)}
         footer={(
           <Login />
         )}

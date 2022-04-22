@@ -6,17 +6,19 @@ import { Login } from '../../components/user/Login';
 import { AppContext } from '../../lib/userContext';
 import { Categories, Menu as GetMenu } from '../../types';
 import { AdminMenuLayout } from '../../components/admin/menu/Layout';
+import { AppContextCart } from '../../lib/cartContext';
 
 export default function Menu(
   { menu, categories } : InferGetServerSidePropsType<typeof getServerSideProps>,
 ): JSX.Element {
   const { loggedin } = useContext(AppContext);
+  const cart = useContext(AppContextCart);
 
   return (
       <>
         <Layout
           title="Veitingarstaðurinn Góði"
-          header={(<NavBar cartItems={0}/>)}
+          header={(<NavBar cartItems={cart.cartCounter}/>)}
           footer={(
             <Login />
           )}

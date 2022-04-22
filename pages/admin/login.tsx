@@ -8,9 +8,11 @@ import { postLogin } from '../../lib/request';
 import { AppContext } from '../../lib/userContext';
 import { Login as LoginComponent } from '../../components/user/Login';
 import { NavBar } from '../../components/layout/NavBar';
+import { AppContextCart } from '../../lib/cartContext';
 
 export default function Login(): JSX.Element {
   const context = useContext(AppContext);
+  const cart = useContext(AppContextCart);
   const [username, setUSername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setError] = useState<string[]>([]);
@@ -44,7 +46,7 @@ export default function Login(): JSX.Element {
     <>
       <Layout
         title="Veitingarstaðurinn Góði"
-        header={(<NavBar cartItems={0}/>)}
+        header={(<NavBar cartItems={cart.cartCounter}/>)}
         footer={(
           <LoginComponent />
         )}

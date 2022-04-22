@@ -38,11 +38,32 @@ export type CategoriesItems = {
 };
 
 export type Cart = {
-  id?:string
+  id:string,
+  created:string,
+  lines?:LinesItem[]
 };
 
 export type CartContextType = {
-  cart: Cart | null
+  cart: Cart | null,
+  counter: () => void;
+  cartCounter: string,
+};
+export type LinesItem = {
+  id: number,
+  product_id: number,
+  title: string,
+  description: string,
+  image: string,
+  category: number,
+  quantity: number,
+  price: number,
+  total: number
+};
+export type CartItem = {
+  id: number,
+  product_id: number,
+  cart_id: number,
+  quantity: number
 };
 
 export type Menu = {
