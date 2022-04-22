@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import { CategoriesItems } from '../types';
 import s from './categoryNav.module.scss';
 
-type Props = any;
-
-export function CategoriesNav({ category }: Props): JSX.Element {
+export function CategoriesNav(
+  { category }: { category:CategoriesItems },
+): JSX.Element {
   return (
     <Link href={`/categories/${category.id.toString()}`}>
       <li className={s.catLink} >

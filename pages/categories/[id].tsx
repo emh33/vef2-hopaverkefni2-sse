@@ -5,8 +5,9 @@ import { Layout } from '../../components/layout/Layout';
 import { NavBar } from '../../components/layout/NavBar';
 import { Login } from '../../components/user/Login';
 import styles from '../../styles/Home.module.css';
+import { CategoriesItems, MenuItems } from '../../types';
 
-function Category({ category, filtered }:any) {
+function Category({ category, filtered } :any): JSX.Element {
   return (
    <div>
     <Head>
@@ -22,7 +23,7 @@ function Category({ category, filtered }:any) {
       <main>
         <h1>{category.title}</h1>
         <ul className={styles.menuList}>
-          {filtered.map((item: any, i:number) => (
+          {filtered.map((item:MenuItems, i:number) => (
             <MenuListItem key={i} item={item}/>
           ))}
         </ul>
@@ -36,7 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/categories');
   const categories = await res.json();
   // console.log(categories)
-  const paths = categories.items.map((category:any) => ({
+  const paths = categories.items.map((category:CategoriesItems) => ({
     params: { id: category.id.toString() },
   }));
 
@@ -50,7 +51,7 @@ export const getStaticProps: GetServerSideProps = async ({ params }) => {
   const menuRes = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/menu');
   const menu = await menuRes.json();
   // eslint-disable-next-line  prefer-arrow-callback
-  const filtered = menu.items.filter(function (item: any) {
+  const filtered = menu.items.filter(function (item: MenuItems) {
     return item.category === category.id;
   });
   return { props: { category, filtered } };

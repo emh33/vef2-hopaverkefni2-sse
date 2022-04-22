@@ -142,6 +142,7 @@ export const deleteOnMenu = async (id:string) => {
 
 export const postMenu = async ({
   category, description, image, price, title,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }:any) => {
   const token = findTOKEN();
   const formData = new FormData();
@@ -172,6 +173,7 @@ export const postMenu = async ({
 
 export const patchMenu = async ({
   category, description, image, price, title, id,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }:any) => {
   const token = findTOKEN();
   const formData = new FormData();

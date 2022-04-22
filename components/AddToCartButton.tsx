@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-export default function AddToCart() {
+export default function AddToCart() : JSX.Element {
   return (
     <div>
       <button>setja í körfu</button>

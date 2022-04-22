@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import router from 'next/router';
 import Image from 'next/image';
 import { useState } from 'react';

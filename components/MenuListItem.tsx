@@ -1,9 +1,8 @@
 import Image from 'next/image';
+import { MenuItems } from '../types';
 import s from './menuListItem.module.scss';
 
-type Props = any;
-
-export function MenuListItem({ item }: Props): JSX.Element {
+export function MenuListItem({ item }:{ item:MenuItems }): JSX.Element {
   return (
     <li className={s.menuItem}>
       <div className={s.menuImgWrapper}>

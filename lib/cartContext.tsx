@@ -8,6 +8,7 @@ export const AppContext = createContext<CartContextType>({
   cart: cartId,
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function CartContext({ children }: any) : JSX.Element {
   const [cart, setCart] = useState<Cart | null>(null);
 

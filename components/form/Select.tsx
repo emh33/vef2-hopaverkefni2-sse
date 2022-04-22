@@ -10,7 +10,7 @@ type Props = {
 };
 
 export function Input({
-  label, name, type, onChange, list,
+  label, name, list,
 }:Props): JSX.Element {
   return (
     <div className={s.select}>

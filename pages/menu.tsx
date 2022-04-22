@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
 import styles from '../styles/Home.module.css';
@@ -8,12 +8,13 @@ import { Login } from '../components/user/Login';
 import { CategoriesNav } from '../components/CategoriesNav';
 import { getPageMenu } from '../lib/request';
 import { MenuListItem } from '../components/MenuListItem';
-import { Menu as GetMenu, MenuItems, LinksType } from '../types';
+import {
+  Menu as GetMenu, MenuItems, LinksType, CategoriesItems,
+} from '../types';
 import { ButtonPage } from '../components/buttons/ButtonPage';
 
-type Props = any;
-
-const Menu: NextPage = ({ categories, menu }: any) => {
+const Menu: NextPage = ({ categories, menu }
+: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { items: itemsMenu, _links: menuLinks } = (menu) as GetMenu;
   const [menuRes, setMenuRes] = useState<GetMenu>(menu);
   const [menuList, setMenuList] = useState<MenuItems[]>(itemsMenu);
@@ -58,15 +59,14 @@ const Menu: NextPage = ({ categories, menu }: any) => {
         )}
       >
         <main>
-
             <ul className={styles.catNav}>
-            {categories.items.map((item: any, i:number) => (
+            {categories.items.map((item: CategoriesItems, i:number) => (
               <CategoriesNav key={i} category={item} />
             ))}
             </ul>
 
             <ul className={styles.menuList}>
-              {menu.items.map((item: any, i:number) => (
+              {menu.items.map((item:MenuItems, i:number) => (
                 <MenuListItem key={i} item={item}/>
               ))}
             </ul>
@@ -81,12 +81,12 @@ const Menu: NextPage = ({ categories, menu }: any) => {
     </div>
   );
 };
-export async function getServerSideProps() {
+export const getServerSideProps : GetServerSideProps = async () => {
   const categoriesRes = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/categories');
   const categories = await categoriesRes.json();
   const menuRes = await fetch('https://vef2-2022-h1-synilausn.herokuapp.com/menu');
   const menu = await menuRes.json();
   return { props: { categories, menu } };
-}
+};
 
 export default Menu;
