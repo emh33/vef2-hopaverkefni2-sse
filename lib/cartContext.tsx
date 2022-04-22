@@ -29,7 +29,6 @@ export function CartContext({ children }: any) : JSX.Element {
         });
         if (res.ok) {
           const json :Cart = await res.json();
-          console.info('jsn: ', json);
           await localStorage.setItem('cart', JSON.stringify(json));
           setCart(json);
         }
