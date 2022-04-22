@@ -9,6 +9,7 @@ export function MenuListItem({ item }:{ item:MenuItems }): JSX.Element {
         <Image className={s.menuImg} src={item.image} layout='fill' />
       </div>
       <p className={s.menuItemTitle}>{item.title}</p>
+      <p>{item.price}</p>
       <p className={s.menuItemDesc}>{item.description}</p>
     </li>
   );

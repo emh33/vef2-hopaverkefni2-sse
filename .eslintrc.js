@@ -24,7 +24,6 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'react/prop-types': 'off',
     'linebreak-style': 'off',
-    'no-console': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 'off', // e-ð issue með typescript :/
     'react/jsx-one-expression-per-line': 'off',

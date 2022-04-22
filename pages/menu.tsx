@@ -2,22 +2,27 @@ import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from '
 import Head from 'next/head';
 import { useState } from 'react';
 import styles from '../styles/Home.module.css';
+import s from '../components/admin/menu/Layout.module.scss';
 import { Layout } from '../components/layout/Layout';
 import { NavBar } from '../components/layout/NavBar';
 import { Login } from '../components/user/Login';
 import { CategoriesNav } from '../components/CategoriesNav';
+import { ButtonPage } from '../components/buttons/ButtonPage';
 import { getPageMenu } from '../lib/request';
 import { MenuListItem } from '../components/MenuListItem';
 import {
   Menu as GetMenu, MenuItems, LinksType, CategoriesItems,
 } from '../types';
-import { ButtonPage } from '../components/buttons/ButtonPage';
 
 const Menu: NextPage = ({ categories, menu }
 : InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { items: itemsMenu, _links: menuLinks } = (menu) as GetMenu;
   const [menuRes, setMenuRes] = useState<GetMenu>(menu);
   const [menuList, setMenuList] = useState<MenuItems[]>(itemsMenu);
+
+  const [errors, setError] = useState<string[]>([]);
+  const [editValues, setEditValues] = useState<MenuItems[]>(itemsMenu);
+
   const [pageLinks, setPageLinks] = useState< LinksType >(menuLinks);
 
   const pageHandler = async (e: any):Promise<void> => {
@@ -66,16 +71,19 @@ const Menu: NextPage = ({ categories, menu }
             </ul>
 
             <ul className={styles.menuList}>
-              {menu.items.map((item:MenuItems, i:number) => (
+              {menuList.map((item:MenuItems, i:number) => (
                 <MenuListItem key={i} item={item}/>
               ))}
             </ul>
-            {pageLinks.prev && (
-              <ButtonPage value='prev' onClick={pageHandler}>Fyrri síða</ButtonPage>
-            )}
-            {pageLinks.next && (
-              <ButtonPage value='next' onClick={pageHandler}>Næsta síða</ButtonPage>
-            )}
+
+            <div className={s.layout__menulist__pagebutton}>
+              {pageLinks.prev && (
+                <ButtonPage value='prev' onClick={pageHandler}>Fyrri síða</ButtonPage>
+              )}
+              {pageLinks.next && (
+                <ButtonPage value='next' onClick={pageHandler}>Næsta síða</ButtonPage>
+              )}
+            </div>
         </main>
       </Layout>
     </div>
